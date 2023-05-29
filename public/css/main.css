@@ -16,5 +16,14 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 4%;
+    margin-top: 100px;
+    text-align: justify;
 }
+.navbar-brand a {
+    color: grey;
+    text-decoration: none;
+  }
+  
+  .navbar-brand a:hover {
+    color: black;
+  }

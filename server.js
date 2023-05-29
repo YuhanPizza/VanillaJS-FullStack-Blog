@@ -58,6 +58,10 @@ app.get('/categories', (req, res) => {
         res.status(500).json({ message: error });//maybe try res.status(404).send(`Message${error}`);
     });
 });
+//me just stuff 
+app.get('/me', (req, res) => {
+    res.redirect('https://github.com/YuhanPizza');
+  });
 //404
 //This use() will not allow req to go beyond it 
 //so we place it at the end of the file, after other routes.
