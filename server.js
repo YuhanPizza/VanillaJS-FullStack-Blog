@@ -22,9 +22,12 @@ blogService.initialize() //u can alter the code format to place all endpoints to
     console.error('Initialization error:', error);
   });
     //about
-app.get('/', (req, res) => {
+app.get('/about', (req, res) => {
     res.sendFile(path.join(__dirname, '/views/about.html'));
 });
+app.get('/',(req, res) => {
+    res.redirect('/about');
+})
     //blog
 app.get('/blog', (req, res) => {
     blogService.getPublishedPosts()
@@ -52,10 +55,14 @@ app.get('/categories', (req, res) => {
         res.json(categories);
     })
     .catch((error) => {
-        res.status(500).json({ message: error });
+        res.status(500).json({ message: error });//maybe try res.status(404).send(`Message${error}`);
     });
 });
-    //404
-app.get('*', (req, res) => {
-  res.status(404).send('Page Not Found');
+//404
+//This use() will not allow req to go beyond it 
+//so we place it at the end of the file, after other routes.
+//This function will catch all other requests that dont match.
+app.use((req, res) => {
+    res.status(404).send("Page Not Found");
 });
+

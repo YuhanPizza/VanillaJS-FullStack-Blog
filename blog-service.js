@@ -4,8 +4,8 @@ const path = require('path');
 const postsFilePath = path.join(__dirname, 'data', 'posts.json');
 const categoriesFilePath = path.join(__dirname, 'data', 'categories.json');
 
-let posts = [];
-let categories = [];
+let posts = []; //this will store the stuff inside of posts.json
+let categories = []; //categories.json
 
 const initialize = () => {
   return new Promise((resolve, reject) => {
