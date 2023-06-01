@@ -1,3 +1,28 @@
+/*********************************************************************************
+
+* WEB322 – Assignment 02
+
+* I declare that this assignment is my own work in accordance with Seneca Academic Policy. No part
+
+* of this assignment has been copied manually or electronically from any other source
+
+* (including 3rd party web sites) or distributed to other students.
+
+*
+
+* Name: Lorenz Alvin Tubo Student ID: 1090934224 Date: 06/01/2023
+
+*
+
+* Cyclic Web App URL: ________________________________________________________
+
+*
+
+* GitHub Repository URL: https://github.com/YuhanPizza/web322-app
+
+*
+
+********************************************************************************/
 //require blog-service
 const blogService = require('./blog-service');
 //express library
@@ -13,7 +38,7 @@ const onHttpStart = ()=>{
     console.log(`Port Listening :${HTTP_PORT}`);
 }
 //initalize 
-blogService.initialize() //u can alter the code format to place all endpoints to run inside of initalize function tbh 
+blogService.initialize() 
   .then(() => {
     //Routes and server setup
     app.listen(HTTP_PORT, onHttpStart);
@@ -55,7 +80,7 @@ app.get('/categories', (req, res) => {
         res.json(categories);
     })
     .catch((error) => {
-        res.status(500).json({ message: error });//maybe try res.status(404).send(`Message${error}`);
+        res.status(500).json({ message: error });//or res.status(404).send(`Message${error}`);
     });
 });
 //me just stuff 

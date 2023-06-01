@@ -19,6 +19,9 @@ body{
     margin-top: 100px;
     text-align: justify;
 }
+.container h2{
+  color:red;
+}
 .navbar-brand a {
     color: grey;
     text-decoration: none;
