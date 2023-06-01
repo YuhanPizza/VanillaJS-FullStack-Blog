@@ -14,7 +14,7 @@
 
 *
 
-* Cyclic Web App URL: ________________________________________________________
+* Cyclic Web App URL: https://easy-teal-elk-gear.cyclic.app/about
 
 *
 

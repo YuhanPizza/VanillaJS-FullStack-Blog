@@ -14,7 +14,7 @@
 
 *
 
-* Cyclic Web App URL: ________________________________________________________
+* Cyclic Web App URL: https://easy-teal-elk-gear.cyclic.app/about
 
 *
 
@@ -26,21 +26,21 @@
 const fs = require('fs');
 const path = require('path');
 
-const postsFilePath = path.join(__dirname, 'data', 'posts.json');
-const categoriesFilePath = path.join(__dirname, 'data', 'categories.json');
+const postsFilePath = path.join(__dirname, 'data', 'posts.json'); //path for posts.json
+const categoriesFilePath = path.join(__dirname, 'data', 'categories.json'); // categories.json
 
 //variables used to store data.
 let posts = []; 
 let categories = []; 
 
-const initialize = () => {
-  return new Promise((resolve, reject) => {
-    fs.readFile(postsFilePath, 'utf8', (err, postData) => {
-      if (err) {
-        reject('Unable to read posts file');
+const initialize = () => { //initalize is an arrow function 
+  return new Promise((resolve, reject) => { //promise 
+    fs.readFile(postsFilePath, 'utf8', (err, postData) => { //used to read the contents of the postFilePath 
+      if (err) {//if there is an error
+        reject('Unable to read posts file'); //reject message.
         return;
       }
-      posts = JSON.parse(postData);
+      posts = JSON.parse(postData);// parsed as Json assigned to variable posts
 
       fs.readFile(categoriesFilePath, 'utf8', (err, categoriesData) => {
         if (err) {
@@ -84,7 +84,8 @@ const getCategories = () => {
     }
   });
 };
-
+//when this module is imported into another file using require the imported object will have access to 
+//these properties. server.js can call these functions.
 module.exports = {
   initialize,
   getAllPosts,
