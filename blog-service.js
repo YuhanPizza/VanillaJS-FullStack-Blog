@@ -84,6 +84,55 @@ const getCategories = () => {
     }
   });
 };
+//add posts
+const addPost = (postData) => {
+  return new Promise((resolve, reject) => {
+    if (postData.published === undefined) {
+      postData.published = false;
+    } else {
+      postData.published = true;
+    }
+
+    postData.id = posts.length + 1;
+
+    posts.push(postData);
+
+    resolve(postData);
+  });
+};
+//get post by cat
+const getPostsByCategory = (category) => {
+  return new Promise((resolve, reject) => {
+    const filteredPosts = posts.filter((post) => post.category === parseInt(category));
+    if (filteredPosts.length === 0) {
+      reject('No results returned');
+    } else {
+      resolve(filteredPosts);
+    }
+  });
+};
+//getpost by date
+const getPostsByMinDate = (minDateStr) => {
+  return new Promise((resolve, reject) => {
+    const filteredPosts = posts.filter((post) => new Date(post.postDate) >= new Date(minDateStr));
+    if (filteredPosts.length === 0) {
+      reject('No results returned');
+    } else {
+      resolve(filteredPosts);
+    }
+  });
+};
+//getpost by id
+const getPostById = (id) => {
+  return new Promise((resolve, reject) => {
+    const post = posts.find((post) => post.id.toString() === id);
+    if (post) {
+      resolve(post);
+    } else {
+      reject('No result returned');
+    }
+  });
+};
 //when this module is imported into another file using require the imported object will have access to 
 //these properties. server.js can call these functions.
 module.exports = {
@@ -91,4 +140,8 @@ module.exports = {
   getAllPosts,
   getPublishedPosts,
   getCategories,
+  addPost,
+  getPostsByCategory,
+  getPostsByMinDate,
+  getPostById,
 };
