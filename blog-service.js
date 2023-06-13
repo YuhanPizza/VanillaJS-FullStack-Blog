@@ -10,7 +10,7 @@
 
 *
 
-* Name: Lorenz Alvin Tubo Student ID: 1090934224 Date: 06/01/2023
+* Name: Lorenz Alvin Tubo Student ID: 1090934224 Date: 06/13/2023
 
 *
 
@@ -105,7 +105,7 @@ const getPostsByCategory = (category) => {
   return new Promise((resolve, reject) => {
     const filteredPosts = posts.filter((post) => post.category === parseInt(category));
     if (filteredPosts.length === 0) {
-      reject('No results returned');
+      reject('No category returned');
     } else {
       resolve(filteredPosts);
     }
@@ -116,7 +116,7 @@ const getPostsByMinDate = (minDateStr) => {
   return new Promise((resolve, reject) => {
     const filteredPosts = posts.filter((post) => new Date(post.postDate) >= new Date(minDateStr));
     if (filteredPosts.length === 0) {
-      reject('No results returned');
+      reject('No Date returned');
     } else {
       resolve(filteredPosts);
     }
@@ -129,7 +129,7 @@ const getPostById = (id) => {
     if (post) {
       resolve(post);
     } else {
-      reject('No result returned');
+      reject('No ID returned');
     }
   });
 };

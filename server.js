@@ -160,6 +160,9 @@ app.get('/posts', (req, res) => {
         });
     }
 });
+app.get('/post/add',(req, res) => {
+    res.sendFile(path.join(__dirname, '/views/addPost.html'));
+})
 //post by Id
 app.get('/post/:value', (req, res) => {
     const postId = req.params.value;
@@ -186,9 +189,7 @@ app.get('/categories', (req, res) => {
         res.status(500).json({ message: error });//or res.status(404).send(`Message${error}`);
     });
 });
-app.get('/post/add',(req, res) => {
-    res.sendFile(path.join(__dirname, '/views/addPost.html'));
-})
+
 //me just stuff 
 app.get('/me', (req, res) => {
     res.redirect('https://github.com/YuhanPizza');
