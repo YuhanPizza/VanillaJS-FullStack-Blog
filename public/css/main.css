@@ -3,7 +3,8 @@ body{
     margin: 0;
     background-image: url('/assets/Background.gif');
     background-position: center center;
-    background-size: no-repeat;
+    background-size: cover;
+    background-repeat: no-repeat;
     color:white;
     font-family:'Press Start 2P',cursive;
 }
@@ -11,6 +12,8 @@ body{
     height: auto;
     background-color: black;
     opacity: 0.8;
+    padding-right: 40px;
+    padding-left: 40px;
 
     color:white;
     display: flex;

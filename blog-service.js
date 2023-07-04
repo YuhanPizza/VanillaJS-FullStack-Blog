@@ -95,6 +95,13 @@ const addPost = (postData) => {
 
     postData.id = posts.length + 1;
 
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+
+    postData.postDate = `${year}-${month}-${day}`;
+
     posts.push(postData);
 
     resolve(postData);
@@ -133,6 +140,18 @@ const getPostById = (id) => {
     }
   });
 };
+
+const getPublishedPostsByCategory = (category) => {
+  return new Promise((resolve, reject) => {
+    const publishedPostsByCategory = posts.filter((post) => post.published === true && post.category === parseInt(category));
+    if (publishedPostsByCategory.length === 0) {
+      reject('No published posts in the specified category');
+    } else {
+      resolve(publishedPostsByCategory);
+    }
+  });
+};
+
 //when this module is imported into another file using require the imported object will have access to 
 //these properties. server.js can call these functions.
 module.exports = {
@@ -144,4 +163,5 @@ module.exports = {
   getPostsByCategory,
   getPostsByMinDate,
   getPostById,
+  getPublishedPostsByCategory,
 };
