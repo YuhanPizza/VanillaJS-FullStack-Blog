@@ -94,17 +94,15 @@ const addPost = (postData) => {
     }
 
     postData.id = posts.length + 1;
-
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-    const day = String(currentDate.getDate()).padStart(2, '0');
-
-    postData.postDate = `${year}-${month}-${day}`;
-
+    postData.postDate = new Date().toISOString().split("T")[0];
     posts.push(postData);
-
+    if (postData){
+    console.log(`${postData.title}`);
     resolve(postData);
+    }
+    else {
+      reject ("Failed to Add Post");
+    }
   });
 };
 //get post by cat

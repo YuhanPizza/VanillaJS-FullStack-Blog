@@ -115,20 +115,24 @@ app.post("/posts/add", upload.single("featureImage"), (req, res) => {
 
     upload(req)
       .then((uploaded) => {
-        processPost(uploaded.url);
+        processPost(uploaded.url,req,res);
       })
       .catch((error) => {
         console.error("Image Upload Failed: ", error);
         res.status(500).send("Image upload failed.");
       });
   } else {
-    processPost("");
+    processPost("",req,res);
   }
 
-  function processPost(imageUrl) {
+  function processPost(imageUrl ,req ,res ) {
     req.body.featureImage = imageUrl;
     const newPost = {
+      body: req.body.body,
+      title:req.body.title,
+      category:req.body.category,
       featureImage: req.body.featureImage,
+      published:req.body.published,
       // Add other properties from req.body as needed
     };
 
@@ -151,7 +155,7 @@ blogService
     app.listen(HTTP_PORT, onHttpStart);
   })
   .catch((error) => {
-    console.error("Initialization error:", error);
+    console.error("Initialization error:",error);
   });
 //about
 app.get("/about", (req, res) => {
