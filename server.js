@@ -1,6 +1,6 @@
 /*********************************************************************************
 
-* WEB322 – Assignment 04
+* WEB322 – Assignment 05
 
 * I declare that this assignment is my own work in accordance with Seneca Academic Policy. No part
 
@@ -10,7 +10,7 @@
 
 *
 
-* Name: Lorenz Alvin Tubo Student ID: 1090934224 Date: 07/06/2023
+* Name: Lorenz Alvin Tubo Student ID: 1090934224 Date: 07/15/2023
 
 *
 
@@ -40,6 +40,7 @@ const express = require("express");
 const app = express();
 //static files
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
 const path = require("path");
 //port
 const HTTP_PORT = process.env.PORT || 8080;
@@ -48,13 +49,20 @@ const onHttpStart = () => {
   console.log(`Port Listening :${HTTP_PORT}`);
 };
 
+
 //strip-Js custom Helper
 exphbs.create({}).handlebars.registerHelper("safeHTML", function (context) {
   return stripJs(context);
 });
 
 //handle-bars config
-app.engine(".hbs", exphbs.engine({ extname: ".hbs" }));
+app.engine(".hbs", exphbs.engine({ extname: ".hbs", helpers:{formatDate: function(dateObj){
+  let year = dateObj.getFullYear();
+  let month = (dateObj.getMonth() + 1).toString();
+  let day = dateObj.getDate().toString();
+  return `${year}-${month.padStart(2, '0')}-${day.padStart(2,'0')}`;
+}
+} }));
 app.set("view engine", ".hbs");
 //cloudinary config
 cloudinary.config({
@@ -215,7 +223,11 @@ app.get("/posts", (req, res) => {
     blogService
       .getPostsByCategory(category)
       .then((posts) => {
-        res.render("posts", { posts: posts });
+        if (posts.length > 0) {
+          res.render("posts", { posts: posts });
+        } else {
+          res.render("posts", { message: "no results" });
+        }
       })
       .catch((error) => {
         res.render("posts", { message: "no results" });
@@ -224,7 +236,11 @@ app.get("/posts", (req, res) => {
     blogService
       .getPostsByMinDate(minDate)
       .then((posts) => {
-        res.render("posts", { posts: posts });
+        if (posts.length > 0) {
+          res.render("posts", { posts: posts });
+        } else {
+          res.render("posts", { message: "no results" });
+        }
       })
       .catch((error) => {
         res.render("posts", { message: "no results" });
@@ -233,15 +249,28 @@ app.get("/posts", (req, res) => {
     blogService
       .getAllPosts()
       .then((posts) => {
-        res.render("posts", { posts: posts });
+        if (posts.length > 0) {
+          res.render("posts", { posts: posts });
+        } else {
+          res.render("posts", { message: "no results" });
+        }
       })
       .catch((error) => {
         res.render("posts", { message: "no results" });
       });
   }
 });
-app.get("/post/add", (req, res) => {
-  res.render("addPost");
+//post add 
+app.get("/posts/add", (req, res) => {
+  blogService.getCategories().then((categories)=>{
+    res.render("addPost",{categories});
+  }).catch(()=>{
+    res.render("addPost",{categories:[]});
+  });
+});
+//categories add
+app.get("/categories/add", (req, res) => {
+  res.render("addCategory");
 });
 //post by Id
 app.get("/post/:value", (req, res) => {
@@ -260,6 +289,21 @@ app.get("/post/:value", (req, res) => {
       res.status(500).json({ message: error });
     });
 });
+//post delete id
+app.get("/posts/delete/:id", (req, res) => {
+  const postId = req.params.id;
+
+  blogService
+    .deletePostById(postId)
+    .then(() => {
+      res.redirect("/posts");
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Unable to remove post / Post not found.");
+    });
+});
+
 //categories
 app.get("/categories", (req, res) => {
   blogService
@@ -275,7 +319,36 @@ app.get("/categories", (req, res) => {
       res.render("categories", { message: "no results" });
     });
 });
+//categories add post
+app.post("/categories/add", (req, res) => {
+  const newCategory = {
+    category: req.body.category,
+  };
 
+  blogService
+    .addCategory(newCategory)
+    .then(() => {
+      res.redirect("/categories");
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Error creating new category.");
+    });
+});
+//categories delete id
+app.get("/categories/delete/:id", (req, res) => {
+  const categoryId = req.params.id;
+
+  blogService
+    .deleteCategoryById(categoryId)
+    .then(() => {
+      res.redirect("/categories");
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Unable to remove category / Category not found.");
+    });
+});
 app.get("/blog/:id", async (req, res) => {
   // Declare an object to store properties for the view
   let viewData = {};

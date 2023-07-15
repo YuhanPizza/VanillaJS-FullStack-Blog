@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-md-12">
     <h2>Posts</h2>
+    <a href="/posts/add" class="btn btn-success pull-right">Add Post</a>
     <hr />
 
     <div class="table-responsive">
@@ -12,6 +13,7 @@
             <th>Post Date</th>
             <th>Category</th>
             <th>Published</th>
+            <th>Delete</th> <!-- New column for the remove button -->
           </tr>
         </thead>
         <tbody>
@@ -19,9 +21,14 @@
             <tr>
               <td>{{this.id}}</td>
               <td>{{this.title}}</td>
-              <td>{{this.postDate}}</td>
+              <td>{{#formatDate this.postDate}}{{/formatDate}}</td>
               <td class="text-center"><a href="/posts?category={{this.category}}">{{this.category}}</a></td>
               <td class="text-center">{{this.published}}</td>
+              <td>
+                <form action="/posts/delete/{{this.id}}" method="get">
+                  <button type="submit" class="btn btn-danger">Remove</button>
+                </form>
+              </td>
             </tr>
           {{/each}}
         </tbody>
