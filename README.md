@@ -161,17 +161,3 @@ Displays the history of user activities.
 
 - `/categories/add` - Form to add a new category.
 - `/categories` - Lists all categories.
-
-## Wanna Contribute? 🤝
-
-Got an awesome idea? Found a nasty bug? Open an issue or shoot us a pull request. All contributions are more than welcome!
-
-## Licenses & Stuff 📝
-
-All this is under MIT License, so feel free to use it and build upon it.
-
-So what are you waiting for? Happy coding! 🚀
-
----
-
-Feel free to adjust and modify this README as you see fit for your project!
