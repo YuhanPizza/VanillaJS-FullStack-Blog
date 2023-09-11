@@ -31,8 +31,6 @@ Wanna take this for a spin? Cool, follow these steps to get the app running on y
 3. **Install all the things**: `npm install`
 4. **Fire it up**: `npm start`
 
-> **Note**: Don't forget to create an `.env` file to put in your secret stuff, like database credentials.
-
 ## Technologies 🛠️
 
 - Node.js
