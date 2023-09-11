@@ -33,7 +33,13 @@ var sequelize = new Sequelize('chcyjspl','chcyjspl','q1iCbG_DUaJHCYpssuZEKpPYazd
   dialectOptions:{
     ssl:{rejectUnauthorized: false}
   },
-  query: { raw: true}
+  query: { raw: true},
+  pool:{
+    max:5,
+    min:0,
+    acquire: 30000,
+    idle:10000
+  }
 })
 
 sequelize.authenticate().then(()=>{
