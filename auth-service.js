@@ -1,3 +1,28 @@
+/*********************************************************************************
+
+* WEB322 – Assignment 06
+
+* I declare that this assignment is my own work in accordance with Seneca Academic Policy. No part
+
+* of this assignment has been copied manually or electronically from any other source
+
+* (including 3rd party web sites) or distributed to other students.
+
+*
+
+* Name: Lorenz Alvin Tubo Student ID: 1090934224 Date: 07/29/2023
+
+*
+
+* Cyclic Web App URL: https://easy-teal-elk-gear.cyclic.app/about
+
+*
+
+* GitHub Repository URL: https://github.com/YuhanPizza/web322-app
+
+*
+
+********************************************************************************/
 //mongoose
 const mongoose = require("mongoose");
 //bcryptjs
@@ -76,7 +101,10 @@ const checkUser = (userData) => {
                     userAgent: userData.userAgent,
                   };
                   user.loginHistory.push(loginInfo);
-  
+                   // Keep only the last 10 logins.
+                  if (user.loginHistory.length > 10) {
+                    user.loginHistory = user.loginHistory.slice(-10);
+                  }
                   return user.save(); // Return the promise
                 } else {
                   reject("Incorrect Password for user: " + userData.userName);

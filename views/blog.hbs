@@ -1,17 +1,18 @@
-<div class="row">
+<div class="row" style="margin-top: 10px">
     <section class="main col-md-9">
         {{#if data.post}}
-        <article>
-            <h2>{{data.post.title}}</h2>
-            <img src="{{data.post.featureImage}}" alt="feature Image" style="width:300px; height:300px;" />
-            <br /><br />
-            {{{safeHTML data.post.body}}}
-            <br /><br />
-            <strong>Category:</strong> {{data.post.category}}<br />
-            <strong>Last Updated:</strong> {{#formatDate data.post.postDate}}{{/formatDate}}
+        <article style="display: flex; align-items: flex-start;">
+            <img src="{{data.post.featureImage}}" alt="feature Image" style="width:300px; height:300px; margin-right: 20px; margin-top: 60px" />
+            <div style="margin-top: 50px">
+                <h2>{{data.post.title}}</h2>
+                {{{safeHTML data.post.body}}}
+                <br /><br />
+                <strong>Category:</strong> {{data.post.category}}<br />
+                <strong>Last Updated:</strong> {{#formatDate data.post.postDate}}{{/formatDate}}
+            </div>
         </article>
         {{else}}
-        <div class="col-md-12 text-center">
+        <div class="col-md-12 text-center" style="margin-top: 20px">
             <h2>{{data.message}}</h2>
             <p>Please try another Post / Category</p>
         </div>
