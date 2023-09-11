@@ -2,7 +2,7 @@
 
 ## Live Demo 🌍
 
-Check out the live demo [here](https://easy-teal-elk-gear.cyclic.app/about).
+Check out the live demo [here](https://crabby-tan-viper.cyclic.app).
 
 ## What's this all about? 🤔
 
