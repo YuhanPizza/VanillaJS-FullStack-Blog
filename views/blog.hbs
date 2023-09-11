@@ -1,15 +1,14 @@
 <div class="row">
     <section class="main col-md-9">
         {{#if data.post}}
-        <article style="display: flex; align-items: flex-start;">
-            <img src="{{data.post.featureImage}}" alt="feature Image" style="width:300px; height:300px; margin-right: 20px;" />
-            <div>
-                <h2>{{data.post.title}}</h2>
-                {{{safeHTML data.post.body}}}
-                <br /><br />
-                <strong>Category:</strong> {{data.post.category}}<br />
-                <strong>Last Updated:</strong> {{#formatDate data.post.postDate}}{{/formatDate}}
-            </div>
+        <article>
+            <h2>{{data.post.title}}</h2>
+            <img src="{{data.post.featureImage}}" alt="feature Image" style="width:300px; height:300px;" />
+            <br /><br />
+            {{{safeHTML data.post.body}}}
+            <br /><br />
+            <strong>Category:</strong> {{data.post.category}}<br />
+            <strong>Last Updated:</strong> {{#formatDate data.post.postDate}}{{/formatDate}}
         </article>
         {{else}}
         <div class="col-md-12 text-center">
