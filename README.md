@@ -2,7 +2,7 @@
 
 ## Live Demo 🌍
 
-Check out the live demo [here](https://crabby-tan-viper.cyclic.app/blog).
+Check out the live demo [here](https://fine-tan-goldfish-boot.cyclic.app).
 
 ## What's this all about? 🤔
 
