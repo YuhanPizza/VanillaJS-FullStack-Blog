@@ -47,7 +47,7 @@ let User;
 const initialize = () => {
   return new Promise(function (resolve, reject) {
     const connectionString =
-      "mongodb+srv://dbUser:0000@senecaweb.swxrpp4.mongodb.net/?retryWrites=true&w=majority";
+    process.env.MONGODB_STRING;
     let db = mongoose.createConnection(connectionString);
 
     db.on("error", (err) => {

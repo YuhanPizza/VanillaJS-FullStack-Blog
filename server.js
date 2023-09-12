@@ -23,6 +23,7 @@
 *
 
 ********************************************************************************/
+require('dotenv').config();
 //client sessions
 const clientSessions = require('client-sessions');
 //auth-service
@@ -53,7 +54,6 @@ const onHttpStart = () => {
   console.log(`Port Listening :${HTTP_PORT}`);
 };
 
-
 //strip-Js custom Helper
 exphbs.create({}).handlebars.registerHelper("safeHTML", function (context) {
   return stripJs(context);
@@ -70,9 +70,9 @@ app.engine(".hbs", exphbs.engine({ extname: ".hbs", helpers:{formatDate: functio
 app.set("view engine", ".hbs");
 //cloudinary config
 cloudinary.config({
-  cloud_name: "dusfrwsg5",
-  api_key: "213224212869577",
-  api_secret: "_m0gWsKSCmTZADZl90nZkXkGj30",
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
   secure: true,
 });
 //upload variable w/o disk storage
